@@ -5,16 +5,28 @@ Build a model for an API that classifies disaster messages on the disaster data 
 - numpy
 - pandas
 - matplotlib
+- sqlite3
+- sqlalchemy
+- sys
+- re
+- nltk
+- sklearn
 
 # Motivation
 Classify the different information correctly, and let the corresponding disposal personnel deal with their respective responsible parts. Help with disaster response.
 
 # Files
-- app：
-- data:
-- models:
+- app：the templates files and HTML files
+- data: the original data and data preprocess file
+- models: the model training file
+
+# How to run?
+- git clone the whole file
+- open terminal
+- preprocess the data: python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db
+- train the model: python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl
 
 # Notes
-
-# Web Page
+## the best performance of the model(RandomForestClassifier)
+the average f1_score of 36 cateogries is 
 
