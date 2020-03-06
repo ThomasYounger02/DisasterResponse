@@ -5,6 +5,15 @@ import sqlite3
 from sqlalchemy import create_engine
 
 def load_data(messages_filepath, categories_filepath):
+    '''load and combibne message and category, return the combined dataframe
+
+    Args:
+        messages_filepath(str): the file path to messages file.
+        categories_filepath(str): the file path to categories file.
+
+    Return:
+        df(dataframe): the combined dataframe.
+    '''
     # load dataset
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
@@ -14,6 +23,14 @@ def load_data(messages_filepath, categories_filepath):
 
 
 def clean_data(df):
+    '''clean the dataframe and return a cleaned one.
+    
+    Args:
+        df(dataframe): the dataframe to deal with.
+
+    Return:
+        df(dataframe): the cleaned dataframe.
+    '''
     # create a dataframe of the 36 individual category columns
     categories = df['categories'].str.split(';', expand=True)
 
@@ -42,6 +59,15 @@ def clean_data(df):
 
 
 def save_data(df, database_filename):
+    '''save the dataframe to a database, if the database not exit, then create it.
+    
+    Args:
+        df(dataframe): the dataframe to save.
+        database_filename(str): the name of the database.
+
+    Return:
+        None
+    '''
     engine = create_engine('sqlite:///{}.db'.format(database_filename))
     # drop teble if exist
     conn = sqlite3.connect('{}.db'.format(database_filename))
