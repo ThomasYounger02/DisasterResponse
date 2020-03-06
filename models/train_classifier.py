@@ -25,6 +25,16 @@ from sklearn.model_selection import GridSearchCV
 
 
 def load_data(database_filepath):
+    '''load the data from a database
+
+    Args:
+        database_filepath(str): the path to the database.
+
+    Return:
+        X(Series): the message.
+        X(dataframe): the categories information.
+        category_names(list): the category names list.
+    '''
     # load data from database
     engine = create_engine('sqlite:///{}'.format(database_filepath))
     df = pd.read_sql_table('DisasterMessage', engine)
@@ -34,6 +44,14 @@ def load_data(database_filepath):
     return X, Y, category_names
 
 def tokenize(text):
+    '''tokenize text message, including deleting stop words, normalization, and lemmatizing.
+
+    Args:
+        text(str): the text to deal with.
+
+    Return:
+        clean_tokens(list): the cleaned tokens list
+    '''
     stop_words = stopwords.words('english')
     #normalization
     text = re.sub(r"[^a-zA-Z0-9]", " ", text.lower())
@@ -46,6 +64,15 @@ def tokenize(text):
 
 
 def build_model():
+    '''build a pipe line to organise the machine learning model training process.
+
+    Args:
+        None
+
+    Return:
+        cv(model): the model instance.
+    '''
+
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
         ('tfidf', TfidfTransformer()),
@@ -67,12 +94,32 @@ def build_model():
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    '''print the model performence information including: precison, recall, f1_score.
+
+    Args:
+        model(model): the trained model.
+        X_test(Series): the X test part data.
+        Y_test(dataframe): the Y test part data.
+        category_names(list): the whole of category names.
+
+    Return:
+        None
+    '''
     pred = model.predict(X_test)
     # classification report
     print(classification_report(Y_test, y_pred, target_names=category_names,digits=4))
 
 
 def save_model(model, model_filepath):
+    '''save the model information to a pkl file.
+
+    Args:
+        model(model): the trained model.
+        model_filepath(str): the path to store the pkl file.
+
+    Return:
+        None
+    '''
     with open(model_filepath, 'wb') as pkl_file:
         pickle.dump(model, pkl_file)
     pkl_file.close()
