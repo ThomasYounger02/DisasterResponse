@@ -29,6 +29,6 @@ Classify the different information correctly, and let the corresponding disposal
 
 # Notes
 ## the best performance of the model(RandomForestClassifier)
-the average f1_score of the original model is 0.45.
-the average f1_score of the original model with GridSearchCV is XXX.
+the average f1_score of the original model is 0.45.   
+the average f1_score of the original model with GridSearchCV is XXX.   
 the average f1_score of the original model with GridSearchCV and feature union is XXX.
