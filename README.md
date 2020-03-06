@@ -25,8 +25,10 @@ Classify the different information correctly, and let the corresponding disposal
 - open terminal
 - preprocess the data: python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db
 - train the model: python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl
+- run the app: pyhon app/run.py
 
 # Notes
 ## the best performance of the model(RandomForestClassifier)
-the average f1_score of 36 cateogries is 
-
+the average f1_score of the original model is 0.45.
+the average f1_score of the original model with GridSearchCV is XXX.
+the average f1_score of the original model with GridSearchCV and feature union is XXX.
